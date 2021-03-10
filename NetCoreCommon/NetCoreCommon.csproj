@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <Authors>Fernando Tinoco</Authors>
+    <Description>Library for .NET Core 5 or higher, with helper classes</Description>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageTags>.NET Core 5 Common Helper</PackageTags>
+    <PackageReleaseNotes>Initial release.</PackageReleaseNotes>
+  </PropertyGroup>
+
+</Project>
