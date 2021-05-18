@@ -1,9 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
+﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
-namespace NetCoreMSCommon.Paging
+namespace NetCoreCommon.Pagination
 {
     public static class PagingExtension
     {

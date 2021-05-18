@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace NetCoreMSCommon.Paging
+namespace NetCoreCommon.Pagination
 {
-    public class DataCollection<T>
+    public class DataCollection<TData>
     {
         public bool HasItems
         {
@@ -13,7 +13,7 @@ namespace NetCoreMSCommon.Paging
             }
         }
 
-        public IEnumerable<T> Items { get; set; }
+        public IEnumerable<TData> Items { get; set; }
         public int Total { get; set; }
         public int Page { get; set; }
         public int Pages { get; set; }
