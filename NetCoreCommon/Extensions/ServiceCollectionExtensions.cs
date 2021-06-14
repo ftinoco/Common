@@ -12,6 +12,15 @@ namespace NetCoreCommon.Extensions
 {
     public static class ServiceCollectionExtensions
     {
+        /// <summary>
+        /// Dependency injection from mapping profiles
+        /// </summary>
+        /// <typeparam name="TProfileID">Profile type</typeparam>
+        /// <param name="services">Services</param>
+        /// <param name="assembly"></param>
+        /// <param name="defaultProfile"></param>
+        /// <param name="usingUniqueProfileAsDefault"></param>
+        /// <returns></returns>
         public static IServiceCollection DiscoverAndRegisterMappingProfiles<TProfileID>(
             this IServiceCollection services, Assembly assembly, TProfileID defaultProfile, bool usingUniqueProfileAsDefault = true)
         {

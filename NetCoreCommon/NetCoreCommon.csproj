@@ -6,13 +6,13 @@
     <Description>Library for .NET Core 5 or higher, with helper classes</Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageTags>.NET Core 5 Common Helper</PackageTags>
-    <PackageReleaseNotes>Initial release.</PackageReleaseNotes>
+    <PackageReleaseNotes>Adding predicate builder and updating servicies collection extension documentation</PackageReleaseNotes>
     <PackageProjectUrl>https://github.com/ftinoco/Common</PackageProjectUrl>
     <RepositoryUrl>https://github.com/ftinoco/Common</RepositoryUrl>
     <RepositoryType>github</RepositoryType>
-    <AssemblyVersion>1.0.3.0</AssemblyVersion>
-    <FileVersion>1.0.3.0</FileVersion>
-    <Version>1.0.3</Version>
+    <AssemblyVersion>1.0.4.0</AssemblyVersion>
+    <FileVersion>1.0.4.0</FileVersion>
+    <Version>1.0.4</Version>
   </PropertyGroup>
 
   <ItemGroup>
