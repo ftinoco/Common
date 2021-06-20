@@ -14,9 +14,11 @@ namespace NetCoreCommon
     public class BaseResult: IBaseResult
     {
         public BaseResult() { }
-         
+
+        [JsonPropertyName("message")]
         public string Message { get; set; }
 
+        [JsonPropertyName("responseCode")]
         public HttpStatusCode ResponseCode { get; set; }
 
         public static Task<IBaseResult> NotFoundAsync()

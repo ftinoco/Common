@@ -1,4 +1,5 @@
 ﻿using System.Net;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace NetCoreCommon
@@ -12,6 +13,7 @@ namespace NetCoreCommon
     {
         public Result() { }
 
+        [JsonPropertyName("data")]
         public TData Data { get; set; }
 
         public static new Task<Result<TData>> FailAsync()
