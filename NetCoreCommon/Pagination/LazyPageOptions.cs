@@ -1,15 +1,14 @@
-﻿using System;
+﻿using NetCoreCommon.Pagination.LazyPageModel;
 using System.Collections;
 using System.ComponentModel;
-using System.Linq.Expressions;
 
-namespace NetCoreCommon.Pagination.DevExtreme
+namespace NetCoreCommon.Pagination
 {
     /// <summary>
     /// A class with properties that specify data processing settings.
     /// </summary>
-    public class DataSourceLoadOptionsBase
-    {
+    public class LazyPageOptions
+    { 
         /// <summary>
         /// A global default value for the <see cref="StringToLower" /> property
         /// </summary>
@@ -118,10 +117,5 @@ namespace NetCoreCommon.Pagination.DevExtreme
 
         public bool AllowAsyncOverSync { get; set; }
 
-        #if DEBUG
-        internal Action<Expression> ExpressionWatcher;
-        internal bool UseEnumerableOnce;
-        internal bool? GuardNulls;
-        #endif
     }
 }

@@ -1,9 +1,9 @@
-﻿namespace NetCoreCommon.Pagination.DevExtreme
+﻿namespace NetCoreCommon.Pagination.LazyPageModel
 {
     /// <summary>
     /// Represents a group or total summary definition.
     /// </summary>
-    public class SummaryInfo
+    internal class SummaryInfo
     {
         /// <summary>
         /// The data field to be used for calculating the summary.

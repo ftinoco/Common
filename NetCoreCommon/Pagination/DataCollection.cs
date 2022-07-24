@@ -4,6 +4,10 @@ using System.Text.Json.Serialization;
 
 namespace NetCoreCommon.Pagination
 {
+    /// <summary>
+    /// Model to manage data collection
+    /// </summary>
+    /// <typeparam name="TData">Data type</typeparam>
     public class DataCollection<TData>
     {
         public bool HasItems
