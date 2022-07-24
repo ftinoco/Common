@@ -1,6 +1,17 @@
-# Common
-Utility library projects for .NET 5. 
-- NetCoreCommon is general helper library 
-- NetCoreMSCommon is just web and microservices projects
+# .NET Core Common Library
 
-This library is released on [NuGet Gallery](https://www.nuget.org/packages/NetCoreCommon/)
+This .NET Core library is compatible with 5 or higher. It is released on [NuGet Gallery](https://www.nuget.org/packages/NetCoreCommon/)
+
+This library has the following features:
+ 
+- Manage pagination process
+- Automapping based on custom profiles
+- Predicate builder
+
+
+## Current version: 1.0.10
+Changelog:
+
+### 1.0.10
+- Refactoring pagination models
+- Adding util for process string to lazy pagination options model
