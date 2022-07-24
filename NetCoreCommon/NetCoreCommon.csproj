@@ -1,27 +1,32 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
-    <Authors>Fernando Tinoco</Authors>
-    <Description>Library for .NET Core 5 or higher.
-- Manage pagination process
-- Automapping based on custom profiles
-- Predicate builder
-</Description>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageTags>.NET Core 5 Common Helper</PackageTags>
-    <PackageReleaseNotes>- Refactoring pagination models
-- Adding util for process string to lazy pagination options model</PackageReleaseNotes>
-    <PackageProjectUrl>https://github.com/ftinoco/Common</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/ftinoco/Common</RepositoryUrl>
-    <RepositoryType>github</RepositoryType>
-    <AssemblyVersion>1.0.10.0</AssemblyVersion>
-    <FileVersion>1.0.10.0</FileVersion>
-    <Version>1.0.10</Version>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net5.0</TargetFramework>
+		<Authors>Fernando Tinoco</Authors>
+		<Description>
+			Library for .NET Core 5 or higher.
+			- Manage pagination process
+			- Automapping based on custom profiles
+			- Predicate builder
+		</Description>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageTags>.NET Core 5 Common Helper</PackageTags>
+		<PackageReleaseNotes>
+			- Refactoring pagination models
+			- Adding util for process string to lazy pagination options model
+		</PackageReleaseNotes>
+		<PackageProjectUrl>https://github.com/ftinoco/Common</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/ftinoco/Common</RepositoryUrl>
+		<RepositoryType>github</RepositoryType>
+		<AssemblyVersion>1.0.10.0</AssemblyVersion>
+		<FileVersion>1.0.10.0</FileVersion>
+		<Version>1.0.10</Version>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.4" />
-    <PackageReference Include="AutoMapper" Version="10.1.1" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.4" />
+		<PackageReference Include="AutoMapper" Version="10.1.1" />
+		<None Include="../README.md" Pack="true" PackagePath="\"/>
+	</ItemGroup>
 </Project>
