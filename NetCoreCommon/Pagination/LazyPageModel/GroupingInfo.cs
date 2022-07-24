@@ -3,7 +3,7 @@
     /// <summary>
     /// Represents a grouping level to be applied to data.
     /// </summary>
-    internal class GroupingInfo : SortingInfo
+    public class GroupingInfo : SortingInfo
     {
         /// <summary>
         /// A value that groups data in ranges of a given length or date/time period.

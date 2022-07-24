@@ -3,7 +3,7 @@
     /// <summary>
     /// Represents a sorting parameter.
     /// </summary>
-    internal class SortingInfo
+    public class SortingInfo
     {
         /// <summary>
         /// The data field to be used for sorting.

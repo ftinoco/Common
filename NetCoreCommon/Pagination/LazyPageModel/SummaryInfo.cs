@@ -3,7 +3,7 @@
     /// <summary>
     /// Represents a group or total summary definition.
     /// </summary>
-    internal class SummaryInfo
+    public class SummaryInfo
     {
         /// <summary>
         /// The data field to be used for calculating the summary.
