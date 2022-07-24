@@ -1,9 +1,9 @@
-﻿namespace NetCoreCommon.Pagination.DevExtreme
+﻿namespace NetCoreCommon.Pagination.LazyPageModel
 {
     /// <summary>
     /// Represents a grouping level to be applied to data.
     /// </summary>
-    public class GroupingInfo : SortingInfo
+    internal class GroupingInfo : SortingInfo
     {
         /// <summary>
         /// A value that groups data in ranges of a given length or date/time period.

@@ -1,11 +1,11 @@
 ﻿using NetCoreCommon.Pagination;
-using NetCoreCommon.Pagination.DevExtreme;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using System.Text;
 using System.Text.Json;
 
 namespace NetCoreCommon.Helpers
@@ -16,83 +16,35 @@ namespace NetCoreCommon.Helpers
     public class Utilities
     {
         /// <summary>
-        /// Build lambda function to filter records
+        /// Get lazy pagination options either from json or base64 string
         /// </summary>
-        /// <typeparam name="TEntity">Entity type</typeparam>
-        /// <param name="parameters">Parameter to filter</param>
-        /// <returns></returns>
-        public static Expression<Func<TEntity, bool>> Filter<TEntity>(LazyPageParameters parameters)
+        /// <param name="paginationOpts">String to process</param>
+        /// <param name="isBase64">Flag that indicate if the string is base64, otherwise json fomat</param>
+        /// <returns>Lazy pagination options object</returns>
+        public static LazyPageOptions GetPaginationOptionsFromString(string paginationOpts, bool isBase64 = true)
         {
-            MethodInfo containsMethod = typeof(string).GetMethods().Where(x => x.Name == "Contains").FirstOrDefault();
-            MethodInfo endsWithMethod = typeof(string).GetMethods().Where(x => x.Name == "EndsWith").FirstOrDefault();
-            MethodInfo startsWithMethod = typeof(string).GetMethods().Where(x => x.Name == "StartsWith").FirstOrDefault();
-
-            var predicate = PredicateBuilder.True<TEntity>();
-            if (parameters != null && parameters?.Filters != null)
+            string strJSON;
+            if (isBase64)
             {
-                foreach (var item in parameters.Filters)
-                {
-                    if (!item.Key.Equals("globalFilter"))
-                    {
-                        var param = Expression.Parameter(typeof(TEntity));
-                        var member = Expression.Property(param, item.Key);
-
-                        if (!GetConstant(member, item, out UnaryExpression constant)) continue;
-
-                        switch (item.Value.MatchMode)
-                        {
-                            case "equals":
-                                var condition =
-                                    Expression.Lambda<Func<TEntity, bool>>(
-                                        Expression.Equal(member, constant), param
-                                    );//.Compile(); // for LINQ to SQl/Entities skip Compile() call
-                                predicate = predicate.And(condition);
-                                break;
-                            default:
-                                var call = Expression.Call(member,
-                                    item.Value.MatchMode.Equals("contains") ? containsMethod :
-                                    (item.Value.MatchMode.Equals("startsWith") ? startsWithMethod : endsWithMethod),
-                                    constant);
-                                predicate = predicate.And(Expression.Lambda<Func<TEntity, bool>>(call, param));
-
-                                break;
-                        }
-                    }
-                }
+                var base64EncodedBytes = Convert.FromBase64String(paginationOpts);
+                strJSON = Encoding.UTF8.GetString(base64EncodedBytes);
             }
-            return predicate;
-        }
+            else
+                strJSON = paginationOpts;
 
-        /// <summary>
-        /// Get expression from member and filter options
-        /// </summary>
-        /// <param name="member">Member expresion</param>
-        /// <param name="filter">Filter option</param>
-        /// <param name="expression">Parameter by ref, unary expresion</param>
-        /// <returns></returns>
-        private static bool GetConstant(MemberExpression member, KeyValuePair<string, LazyPageFilter> filter, out UnaryExpression expression)
-        {
-            expression = null;
             try
             {
-                var propertyType = ((PropertyInfo)member.Member).PropertyType;
-                var converter = TypeDescriptor.GetConverter(propertyType); // 1
-
-                if (!converter.CanConvertFrom(typeof(string))) // 2
-                    throw new NotSupportedException();
-
-                var propertyValue = converter.ConvertFromInvariantString(filter.Value.Value); // 3
-                var constant = Expression.Constant(propertyValue);
-                expression = Expression.Convert(constant, propertyType); // 4
-                return true;
+                return JsonSerializer.Deserialize<LazyPageOptions>(strJSON, new()
+                {
+                    PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+                    WriteIndented = true,
+                });
             }
             catch (Exception)
             {
-                return false;
+                return new LazyPageOptions();
             }
         }
-
-        #region DevExtreme
 
         /// <summary>
         /// Build lambda function to filter records
@@ -100,7 +52,7 @@ namespace NetCoreCommon.Helpers
         /// <typeparam name="TEntity">Entity type</typeparam>
         /// <param name="parameters">Parameter to filter</param>
         /// <returns></returns>
-        public static Expression<Func<TEntity, bool>> GetFilterExpression<TEntity>(DataSourceLoadOptionsBase parameters)
+        public static Expression<Func<TEntity, bool>> GetFilterExpression<TEntity>(LazyPageOptions parameters)
         {
             var predicate = PredicateBuilder.True<TEntity>();
             if (parameters != null && parameters.Filter != null)
@@ -143,7 +95,36 @@ namespace NetCoreCommon.Helpers
         }
 
         /// <summary>
-        /// Get fitrers
+        /// Get expression from member and filter options
+        /// </summary>
+        /// <param name="member">Member expresion</param>
+        /// <param name="filter">Filter option</param>
+        /// <param name="expression">Parameter by ref, unary expresion</param>
+        /// <returns></returns>
+        private static bool GetConstant(MemberExpression member, KeyValuePair<string, LazyPageFilter> filter, out UnaryExpression expression)
+        {
+            expression = null;
+            try
+            {
+                var propertyType = ((PropertyInfo)member.Member).PropertyType;
+                var converter = TypeDescriptor.GetConverter(propertyType); // 1
+
+                if (!converter.CanConvertFrom(typeof(string))) // 2
+                    throw new NotSupportedException();
+
+                var propertyValue = converter.ConvertFromInvariantString(filter.Value.Value); // 3
+                var constant = Expression.Constant(propertyValue);
+                expression = Expression.Convert(constant, propertyType); // 4
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Get filters
         /// </summary>
         /// <param name="parameters">List of dynamic objects</param>
         /// <param name="filters">Filters to set</param>
@@ -181,7 +162,5 @@ namespace NetCoreCommon.Helpers
                 index++;
             }
         }
-
-        #endregion  
     }
 }

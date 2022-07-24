@@ -1,9 +1,9 @@
-﻿namespace NetCoreCommon.Pagination.DevExtreme
+﻿namespace NetCoreCommon.Pagination.LazyPageModel
 {
     /// <summary>
     /// Represents a sorting parameter.
     /// </summary>
-    public class SortingInfo
+    internal class SortingInfo
     {
         /// <summary>
         /// The data field to be used for sorting.
